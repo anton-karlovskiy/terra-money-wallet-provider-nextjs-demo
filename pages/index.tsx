@@ -1,14 +1,14 @@
-import ConnectSample from './connect-sample';
-import CW20TokensSample from './cw20-tokens-sample';
-import NetworkSample from './network-sample';
-import QuerySample from './query-sample';
-import SignBytesSample from './sign-bytes-sample';
-import SignSample from './sign-sample';
-import TxSample from './tx-sample';
+import ConnectSample from 'components/ConnectSample';
+import QuerySample from 'components/QuerySample';
+import TxSample from 'components/TxSample';
+import SignSample from 'components/SignSample';
+import SignBytesSample from 'components/SignBytesSample';
+import CW20TokensSample from 'components/CW20TokensSample';
+import NetworkSample from 'components/NetworkSample';
 
 const Home = () => {
   return (
-    <div>
+    <>
       <ConnectSample />
       <QuerySample />
       <TxSample />
@@ -16,7 +16,7 @@ const Home = () => {
       <SignBytesSample />
       <CW20TokensSample />
       <NetworkSample />
-    </div>
+    </>
   );
 };
 

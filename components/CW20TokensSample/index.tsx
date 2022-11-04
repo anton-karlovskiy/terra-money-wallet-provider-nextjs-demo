@@ -1,22 +1,14 @@
-import { useWallet, WalletStatus } from '@terra-money/use-wallet';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-
-export default function CW20TokensSample() {
-  const { status, supportFeatures } = useWallet();
-
-  return (
-    <div>
-      <h1>CW20 Tokens Sample</h1>
-      {supportFeatures.has('cw20-token') ? (
-        <Component />
-      ) : status === WalletStatus.WALLET_CONNECTED ? (
-        <p>This connection does not support CW20 commands</p>
-      ) : (
-        <p>Wallet not connected!</p>
-      )}
-    </div>
-  );
-}
+// ray test touch <
+import {
+  useWallet,
+  WalletStatus
+} from '@terra-money/use-wallet';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 
 const ANC = {
   'columnbus-5': 'terra14z56l0fp2lsf86zy3hty2z47ezkhnthtr9yq76',
@@ -34,7 +26,11 @@ const BETH = {
 };
 
 function Component() {
-  const { network, hasCW20Tokens, addCW20Tokens } = useWallet();
+  const {
+    network,
+    hasCW20Tokens,
+    addCW20Tokens
+  } = useWallet();
 
   const [cw20TokensExists, setCW20TokensExists] = useState<object | null>(null);
 
@@ -70,3 +66,23 @@ function Component() {
     </div>
   );
 }
+
+const CW20TokensSample = () => {
+  const { status, supportFeatures } = useWallet();
+
+  return (
+    <div>
+      <h1>CW20 Tokens Sample</h1>
+      {supportFeatures.has('cw20-token') ? (
+        <Component />
+      ) : status === WalletStatus.WALLET_CONNECTED ? (
+        <p>This connection does not support CW20 commands</p>
+      ) : (
+        <p>Wallet not connected!</p>
+      )}
+    </div>
+  );
+};
+
+export default CW20TokensSample;
+// ray test touch >

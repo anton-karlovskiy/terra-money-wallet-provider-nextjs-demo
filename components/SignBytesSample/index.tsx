@@ -1,3 +1,4 @@
+// ray test touch <
 import {
   SignBytesFailed,
   SignBytesResult,
@@ -6,11 +7,14 @@ import {
   UserDenied,
   verifyBytes,
 } from '@terra-money/wallet-provider';
-import React, { useCallback, useState } from 'react';
+import {
+  useCallback,
+  useState
+} from 'react';
 
 const TEST_BYTES = Buffer.from('hello world');
 
-export default function SignBytesSample() {
+const SignBytesSample = () => {
   const [txResult, setTxResult] = useState<SignBytesResult | null>(null);
   const [txError, setTxError] = useState<string | null>(null);
   const [verifyResult, setVerifyResult] = useState<string | null>(null);
@@ -29,10 +33,12 @@ export default function SignBytesSample() {
     connectedWallet
       .signBytes(TEST_BYTES)
       .then((nextSignBytesResult: SignBytesResult) => {
+        console.log('[send] nextSignBytesResult => ', nextSignBytesResult);
         setTxResult(nextSignBytesResult);
         setTxError(null);
 
         const result = verifyBytes(TEST_BYTES, nextSignBytesResult.result);
+        console.log('[send] result => ', result);
         setVerifyResult(result ? 'Verify OK' : 'Verify failed');
       })
       .catch((error) => {
@@ -46,10 +52,7 @@ export default function SignBytesSample() {
         } else if (error instanceof SignBytesFailed) {
           setTxError('Sign Bytes Failed');
         } else {
-          setTxError(
-            'Unknown Error: ' +
-              (error instanceof Error ? error.message : String(error)),
-          );
+          setTxError('Unknown Error: ' + (error instanceof Error ? error.message : String(error)));
         }
       });
   }, [connectedWallet]);
@@ -57,7 +60,6 @@ export default function SignBytesSample() {
   return (
     <div>
       <h1>Sign Bytes Sample</h1>
-
       {connectedWallet?.availableSignBytes &&
         !txResult &&
         !txError &&
@@ -66,13 +68,7 @@ export default function SignBytesSample() {
             Sign bytes with {connectedWallet.walletAddress}
           </button>
         )}
-
-      {txResult && <pre>{JSON.stringify(txResult, null, 2)}</pre>}
-
       {txError && <pre>{txError}</pre>}
-
-      {verifyResult && <pre>{verifyResult}</pre>}
-
       {(!!txResult || !!txError || !!verifyResult) && (
         <button
           onClick={() => {
@@ -84,12 +80,13 @@ export default function SignBytesSample() {
           Clear result
         </button>
       )}
-
       {!connectedWallet && <p>Wallet not connected!</p>}
-
       {connectedWallet && !connectedWallet.availableSignBytes && (
         <p>This connection does not support signBytes()</p>
       )}
     </div>
   );
-}
+};
+
+export default SignBytesSample;
+// ray test touch >

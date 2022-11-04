@@ -1,5 +1,4 @@
 // ray test touch <
-import * as React from 'react';
 import {
   Fee,
   MsgSend
@@ -11,24 +10,24 @@ import {
   TxResult,
   TxUnspecifiedError,
   useConnectedWallet,
-  UserDenied
+  UserDenied,
 } from '@terra-money/wallet-provider';
+import {
+  useCallback,
+  useState
+} from 'react';
 
-const TEST_TO_ADDRESS = 'terra12hnhh5vtyg5juqnzm43970nh4fw42pt27nw9g9';
+const TEST_TO_ADDRESS = 'terra1k3y6ujl8q2jddn3r83f96see4etdl4hdhc3ucw';
+const TERRA_AXL_USDC_DENOM = 'ibc/B3504E092456BA618CC28AC671A71FB08C6CA0FD0BE7C8A5B5A3E2DD933CC9E4';
 
-const SendIBCSample = () => {
-  const [txResult, setTxResult] = React.useState<TxResult | null>(null);
-  const [txError, setTxError] = React.useState<string | null>(null);
+const TxSample = () => {
+  const [txResult, setTxResult] = useState<TxResult | null>(null);
+  const [txError, setTxError] = useState<string | null>(null);
 
   const connectedWallet = useConnectedWallet();
 
-  const proceed = React.useCallback(() => {
+  const proceed = useCallback(() => {
     if (!connectedWallet) {
-      return;
-    }
-
-    if (connectedWallet.network.chainID.startsWith('columbus')) {
-      alert(`Please only execute this example on Testnet`);
       return;
     }
 
@@ -37,15 +36,15 @@ const SendIBCSample = () => {
 
     connectedWallet
       .post({
-        fee: new Fee(1000000, '200000uusd'),
+        fee: new Fee(600000, { uluna: 600000 }),
         msgs: [
           new MsgSend(connectedWallet.walletAddress, TEST_TO_ADDRESS, {
-            uusd: 1000000,
+            [TERRA_AXL_USDC_DENOM]: 1000000, // 1 USDC vs. 6 decimals
           }),
         ],
       })
       .then((nextTxResult: TxResult) => {
-        console.log(nextTxResult);
+        console.log('[proceed] nextTxResult => ', nextTxResult);
         setTxResult(nextTxResult);
       })
       .catch((error: unknown) => {
@@ -60,10 +59,7 @@ const SendIBCSample = () => {
         } else if (error instanceof TxUnspecifiedError) {
           setTxError('Unspecified Error: ' + error.message);
         } else {
-          setTxError(
-            'Unknown Error: ' +
-              (error instanceof Error ? error.message : String(error)),
-          );
+          setTxError('Unknown Error: ' + (error instanceof Error ? error.message : String(error)));
         }
       });
   }, [connectedWallet]);
@@ -74,25 +70,7 @@ const SendIBCSample = () => {
       {connectedWallet?.availablePost && !txResult && !txError && (
         <button onClick={proceed}>Send 1USD to {TEST_TO_ADDRESS}</button>
       )}
-      {txResult && (
-        <>
-          <pre>{JSON.stringify(txResult, null, 2)}</pre>
-          {connectedWallet && txResult && (
-            <div>
-            <a
-              href={`https://finder.terra.money/${connectedWallet.network.chainID}/tx/${txResult.result.txhash}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open Tx Result in Terra Finder
-            </a>
-            </div>
-          )}
-        </>
-      )}
-
       {txError && <pre>{txError}</pre>}
-
       {(!!txResult || !!txError) && (
         <button
           onClick={() => {
@@ -111,5 +89,5 @@ const SendIBCSample = () => {
   );
 };
 
-export default SendIBCSample;
+export default TxSample;
 // ray test touch >

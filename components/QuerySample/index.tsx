@@ -1,7 +1,14 @@
-import { useConnectedWallet, useLCDClient } from '@terra-money/wallet-provider';
-import React, { useEffect, useState } from 'react';
+// ray test touch <
+import {
+  useConnectedWallet,
+  useLCDClient
+} from '@terra-money/wallet-provider';
+import {
+  useEffect,
+  useState
+} from 'react';
 
-export default function QuerySample() {
+const QuerySample = () => {
   const lcd = useLCDClient();
   const connectedWallet = useConnectedWallet();
 
@@ -10,6 +17,7 @@ export default function QuerySample() {
   useEffect(() => {
     if (connectedWallet) {
       lcd.bank.balance(connectedWallet.walletAddress).then(([coins]) => {
+        console.log('[QuerySample useEffect] coins => ', coins);
         setBank(coins.toString());
       });
     } else {
@@ -24,4 +32,7 @@ export default function QuerySample() {
       {!connectedWallet && <p>Wallet not connected!</p>}
     </div>
   );
-}
+};
+
+export default QuerySample;
+// ray test touch >

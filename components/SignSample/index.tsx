@@ -1,4 +1,3 @@
-// ray test touch <
 import {
   Fee,
   MsgSend,
@@ -108,4 +107,3 @@ const SignSample = () => {
 };
 
 export default SignSample;
-// ray test touch >

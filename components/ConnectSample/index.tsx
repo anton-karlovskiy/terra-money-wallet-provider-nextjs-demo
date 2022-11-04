@@ -1,4 +1,3 @@
-// ray test touch <
 import {
   ConnectType,
   useWallet,
@@ -62,4 +61,3 @@ const ConnectSample = () => {
 };
 
 export default ConnectSample;
-// ray test touch >

@@ -1,4 +1,3 @@
-// ray test touch <
 import {
   SignBytesFailed,
   SignBytesResult,
@@ -89,4 +88,3 @@ const SignBytesSample = () => {
 };
 
 export default SignBytesSample;
-// ray test touch >

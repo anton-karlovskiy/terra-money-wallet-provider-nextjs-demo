@@ -1,4 +1,3 @@
-// ray test touch <
 import {
   Fee,
   MsgSend
@@ -90,4 +89,3 @@ const TxSample = () => {
 };
 
 export default TxSample;
-// ray test touch >

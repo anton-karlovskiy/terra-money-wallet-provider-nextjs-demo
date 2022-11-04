@@ -1,4 +1,3 @@
-// ray test touch <
 import {
   useWallet,
   WalletStatus
@@ -66,4 +65,3 @@ const NetworkSample = (): JSX.Element => {
 };
 
 export default NetworkSample;
-// ray test touch >

@@ -1,4 +1,3 @@
-// ray test touch <
 import {
   useWallet,
   WalletStatus
@@ -85,4 +84,3 @@ const CW20TokensSample = () => {
 };
 
 export default CW20TokensSample;
-// ray test touch >

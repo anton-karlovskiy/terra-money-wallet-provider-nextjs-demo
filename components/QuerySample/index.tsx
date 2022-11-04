@@ -1,4 +1,3 @@
-// ray test touch <
 import {
   useConnectedWallet,
   useLCDClient
@@ -35,4 +34,3 @@ const QuerySample = () => {
 };
 
 export default QuerySample;
-// ray test touch >

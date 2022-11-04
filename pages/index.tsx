@@ -6,7 +6,7 @@ import SignBytesSample from './sign-bytes-sample';
 import SignSample from './sign-sample';
 import TxSample from './tx-sample';
 
-export default function Index() {
+const Home = () => {
   return (
     <div>
       <ConnectSample />
@@ -18,4 +18,6 @@ export default function Index() {
       <NetworkSample />
     </div>
   );
-}
+};
+
+export default Home;
